@@ -1,0 +1,19 @@
+{
+    "name": "chayka/email-wpp",
+    "description": "Email Helper for Chayka framework",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Boris Mossounov",
+            "email": "borix@tut.by"
+        }
+    ],
+    "chayka-wp-plugin": "Chayka\\Email\\Plugin",
+    "autoload":{
+        "classmap": ["app/helpers", "Plugin.php"]
+    },
+    "require": {
+        "chayka/wp": "dev-master"
+    }
+}
