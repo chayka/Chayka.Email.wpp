@@ -84,4 +84,8 @@ class Plugin extends WP\Plugin{
     {
         // TODO: Implement registerFilters() method.
     }
+
+    public function registerConsolePages(){
+
+    }
 }
