@@ -1,9 +1,10 @@
-This is email options page
+<h2>Email Settings</h2>
 
-<?php
-/**
- * Created by PhpStorm.
- * User: borismossounov
- * Date: 21.10.14
- * Time: 18:25
- */ 
+<div data-ng-app="ng-options-form" data-ng-controller="optionsForm" data-ng-init="namespace = 'Chayka.Email'">
+    <form data-form-validator="validator">
+        <div class="form_field" data-form-field="notification_email" data-check-email="Should be a valid email">
+            <label>Email для уведомлений:</label><input type="text" data-ng-init="options.notification_email=''" data-ng-model="options.notification_email"/>
+        </div>
+        <button data-ng-click="saveOptions();">Save</button>
+    </form>
+</div>

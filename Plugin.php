@@ -18,7 +18,7 @@ class Plugin extends WP\Plugin{
     const TAXONOMY_CONTENT_FRAGMENT_TAG = 'content-fragment-tag';
 
     public static function init(){
-
+//        echo __FILE__;
         self::$instance = $plugin = new self(__FILE__, array(
             'admin-email'
         ));
@@ -86,6 +86,6 @@ class Plugin extends WP\Plugin{
     }
 
     public function registerConsolePages(){
-
+        $this->addConsolePage('Email settings', 'Email', 'update_core', 'admin-email', '/admin-email/');
     }
 }

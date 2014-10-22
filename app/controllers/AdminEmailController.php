@@ -13,7 +13,7 @@ use Chayka\MVC\Controller;
 class AdminEmailController extends Controller{
 
     public function indexAction(){
-
+        wp_enqueue_script('ng-options-form');
     }
 
     public function testAction(){
