@@ -86,6 +86,24 @@ class EmailHelper {
     }
 
     /**
+     * Nice function to redefine with:
+     *
+     * return Plugin::getView();
+     *
+     * @return View;
+     */
+    public static function getView(){
+        $scriptPath = "app/views";
+        $html = new View();
+        $html->addBasePath($scriptPath);
+        foreach(self::$scriptPaths as $path){
+            $html->addBasePath($path);
+        }
+
+        return $html;
+    }
+
+    /**
      * Send templated message
      *
      * @param string $subject
@@ -95,16 +113,12 @@ class EmailHelper {
      * @param string $from
      * @param string $cc
      * @param string $bcc
-     * @param string $scriptPath
      * @return bool
      */
-    public static function sendTemplate($subject, $template, $params, $to, $from = '', $cc = '', $bcc = '', $scriptPath = '/views/email/'){
+    public static function sendTemplate($subject, $template, $params, $to, $from = '', $cc = '', $bcc = ''){
 
-        $html = new View();
-        $html->addBasePath($scriptPath);
-        foreach(self::$scriptPaths as $path){
-            $html->addBasePath($path);
-        }
+        $html = static::getView();
+
         foreach($params as $key => $value){
             $html->assign($key, $value);
         }
