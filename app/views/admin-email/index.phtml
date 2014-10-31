@@ -1,10 +1,48 @@
 <h2>Email Settings</h2>
 
-<div data-ng-app="ng-options-form" data-ng-controller="optionsForm" data-ng-init="namespace = 'Chayka.Email'">
-    <form data-form-validator="validator">
-        <div class="form_field" data-form-field="notification_email" data-check-email="Should be a valid email">
-            <label>Email для уведомлений:</label><input type="text" data-ng-init="options.notification_email=''" data-ng-model="options.notification_email"/>
+<div data-ng-app="chayka-email-options-form">
+    <div data-ng-controller="optionsForm" data-ng-init="namespace = 'Chayka.Email'">
+        <form data-form-validator="validator" novalidate="novalidate">
+            <div class="form_field" data-form-field="notification_email" data-check-email="Should be a valid email">
+                <label>Notifications email</label><input type="text" data-ng-init="options.notification_email=''" data-ng-model="options.notification_email"/>
+            </div>
+            <div class="form_field" data-form-field="mail_from" data-check-email="Should be a valid email">
+                <label>From (email)</label><input type="text" data-ng-init="options.mail_from=''" data-ng-model="options.mail_from"/>
+            </div>
+            <div class="form_field" data-form-field="mail_from_name">
+                <label>From (name)</label><input type="text" data-ng-init="options.mail_from_name=''" data-ng-model="options.mail_from_name"/>
+            </div>
+            <div class="form_field" data-form-field="smtp_host">
+                <label>SMTP Host</label><input type="text" data-ng-init="options.smtp_host=''" data-ng-model="options.smtp_host"/>
+            </div>
+            <div class="form_field" data-form-field="smtp_port">
+                <label>SMTP Port</label><input type="text" data-ng-init="options.smtp_port=''" data-ng-model="options.smtp_port"/>
+            </div>
+            <div class="form_field" data-form-field="smtp_ssl">
+                <label>SMTP SSL</label><select data-ng-init="options.smtp_ssl='none'; sslOptions = ['none', 'tsl', 'ssl']" data-ng-options="opt for opt in sslOptions" data-ng-model="options.smtp_ssl"/></select>
+            </div>
+            <div class="form_field" data-form-field="smtp_auth">
+                <label>SMTP Auth</label><select data-ng-init="options.smtp_auth='0'; authOptions = {'0': 'No', '1': 'Yes'}" data-ng-options="value for (key, value) in authOptions" data-ng-model="options.smtp_auth"/></select>
+            </div>
+            <div class="form_field" data-form-field="smtp_user">
+                <label>SMTP User</label><input type="text" data-ng-init="options.smtp_user=''" data-ng-model="options.smtp_user"/>
+            </div>
+            <div class="form_field" data-form-field="smtp_pass">
+                <label>SMTP User</label><input type="text" data-ng-init="options.smtp_pass=''" data-ng-model="options.smtp_pass"/>
+            </div>
+            <button data-ng-click="saveOptions();">Save</button>
+        </form>
+    </div>
+    <div data-ng-controller="test">
+    <form data-form-validator="validator" novalidate="novalidate">
+        <div class="form_field" data-form-field="to" data-check-email="Should be a valid email">
+            <label>To (email)</label><input type="text" data-ng-init="fields.to=''" data-ng-model="fields.to"/>
         </div>
-        <button data-ng-click="saveOptions();">Save</button>
+        <div class="form_field" data-form-field="message">
+            <label>Message</label><textarea data-ng-init="fields.message=''" data-ng-model="fields.message"></textarea>
+        </div>
+        <div data-form-message></div>
+        <button data-ng-click="send();">Send</button>
     </form>
+    </div>
 </div>

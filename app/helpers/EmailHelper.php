@@ -2,6 +2,8 @@
 
 namespace Chayka\Email;
 
+require_once 'wp-includes/class-phpmailer.php';
+
 use Chayka\MVC\View;
 use PHPMailer;
 
@@ -122,6 +124,8 @@ class EmailHelper {
         foreach($params as $key => $value){
             $html->assign($key, $value);
         }
+
+        $html->enableNls(true);
 
         $content = $html->render($template);
 

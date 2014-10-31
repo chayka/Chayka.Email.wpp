@@ -66,7 +66,7 @@ class Plugin extends WP\Plugin{
      */
     public function registerResources($minimize = false)
     {
-        // TODO: Implement registerResources() method.
+        $this->registerScript('chayka-email-options-form', 'src/ng-modules/chayka-email-options-form.js', array('chayka-options-form', 'chayka-ajax'));
     }
 
     /**
@@ -86,6 +86,6 @@ class Plugin extends WP\Plugin{
     }
 
     public function registerConsolePages(){
-        $this->addConsolePage('Email settings', 'Email', 'update_core', 'admin-email', '/admin-email/');
+        $this->addConsolePage('Email settings', 'Email', 'update_core', 'chayka-email', '/admin-email/');
     }
 }
