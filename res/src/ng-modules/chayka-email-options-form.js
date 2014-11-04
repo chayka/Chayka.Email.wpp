@@ -11,6 +11,7 @@ angular.module('chayka-email-options-form', ['chayka-options-form', 'chayka-ajax
             if($scope.validator.validateFields()){
                 ajax.post('/api/admin-email/test', $scope.fields, {
                     formValidator: $scope.validator,
+                    spinnerMessage: 'Sending email...',
                     success: function(data){
                         $scope.validator.showMessage(data.message);
                     }

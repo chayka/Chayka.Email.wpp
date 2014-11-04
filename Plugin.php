@@ -86,6 +86,6 @@ class Plugin extends WP\Plugin{
     }
 
     public function registerConsolePages(){
-        $this->addConsolePage('Email settings', 'Email', 'update_core', 'chayka-email', '/admin-email/');
+        $this->addConsoleSubPage('chayka-core', 'Email', 'update_core', 'chayka-email', '/admin-email/');
     }
 }

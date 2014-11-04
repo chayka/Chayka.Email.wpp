@@ -19,10 +19,10 @@
                 <label>SMTP Port</label><input type="text" data-ng-init="options.smtp_port=''" data-ng-model="options.smtp_port"/>
             </div>
             <div class="form_field" data-form-field="smtp_ssl">
-                <label>SMTP SSL</label><select data-ng-init="options.smtp_ssl='none'; sslOptions = ['none', 'tsl', 'ssl']" data-ng-options="opt for opt in sslOptions" data-ng-model="options.smtp_ssl"/></select>
+                <label>SMTP SSL</label><select data-ng-init="options.smtp_ssl='none'; sslOptions = ['none', 'tsl', 'ssl']" data-ng-options="opt for opt in sslOptions" data-ng-model="options.smtp_ssl"></select>
             </div>
             <div class="form_field" data-form-field="smtp_auth">
-                <label>SMTP Auth</label><select data-ng-init="options.smtp_auth='0'; authOptions = {'0': 'No', '1': 'Yes'}" data-ng-options="value for (key, value) in authOptions" data-ng-model="options.smtp_auth"/></select>
+                <label>SMTP Auth</label><select data-ng-init="options.smtp_auth='0'; authOptions = {'0': 'No', '1': 'Yes'}" data-ng-options="key as value for (key, value) in authOptions" data-ng-model="options.smtp_auth"></select>
             </div>
             <div class="form_field" data-form-field="smtp_user">
                 <label>SMTP User</label><input type="text" data-ng-init="options.smtp_user=''" data-ng-model="options.smtp_user"/>
