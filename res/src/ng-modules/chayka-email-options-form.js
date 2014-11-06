@@ -13,7 +13,7 @@ angular.module('chayka-email-options-form', ['chayka-options-form', 'chayka-ajax
                     formValidator: $scope.validator,
                     spinnerMessage: 'Sending email...',
                     success: function(data){
-                        $scope.validator.showMessage(data.message);
+                        //$scope.validator.showMessage(data.message);
                     }
                 });
             }
