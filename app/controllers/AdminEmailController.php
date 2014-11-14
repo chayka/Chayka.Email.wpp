@@ -12,15 +12,18 @@ use Chayka\Helpers\InputHelper;
 use Chayka\Helpers\JsonHelper;
 use Chayka\Helpers\Util;
 use Chayka\MVC\Controller;
+use Chayka\WP\Helpers\AclHelper;
 use Exception;
 
 class AdminEmailController extends Controller{
 
     public function indexAction(){
         wp_enqueue_script('chayka-email-options-form');
+        wp_enqueue_style('chayka-options-form');
     }
 
     public function testAction(){
+        AclHelper::apiPermissionRequired();
         InputHelper::checkParam('to')->required()->email();
         InputHelper::checkParam('message')->required();
         InputHelper::captureInput();
