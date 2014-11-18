@@ -52,10 +52,13 @@ class EmailHelper {
         $smtpPass  = OptionHelper::getOption('smtp_pass', '');
 
         $fn = get_template_directory().'/app/views/email/template.phtml';
+
+        $fn = apply_filters_ref_array('EmailHelper.htmlTemplate', array($fn));
+
         if(file_exists($fn)){
             $view = new View();
-            $view->addBasePath(get_template_directory().'/app/views');
-            $html = str_replace('<!--content-->', $html, $view->render('email/template.phtml'));
+//            $view->addBasePath(get_template_directory().'/app/views');
+            $html = str_replace('<!--content-->', $html, $view->render($fn));
         }
 
         $mail = new PHPMailer();
@@ -128,6 +131,8 @@ class EmailHelper {
         $html->enableNls(true);
 
         $content = $html->render($template);
+
+        $content = apply_filters_ref_array('EmailHelper.sendTemplate', array($content, $template, $params));
 
         return self::send($subject, $content, $to, $from, $cc, $bcc);
     }
