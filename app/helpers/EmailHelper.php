@@ -57,7 +57,6 @@ class EmailHelper {
 
         if(file_exists($fn)){
             $view = new View();
-//            $view->addBasePath(get_template_directory().'/app/views');
             $html = str_replace('<!--content-->', $html, $view->render($fn));
         }
 
