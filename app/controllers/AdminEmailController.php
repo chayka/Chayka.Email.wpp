@@ -11,15 +11,17 @@ namespace Chayka\Email;
 use Chayka\Helpers\InputHelper;
 use Chayka\Helpers\JsonHelper;
 use Chayka\Helpers\Util;
-use Chayka\MVC\Controller;
+use Chayka\WP\MVC\Controller;
 use Chayka\WP\Helpers\AclHelper;
 use Exception;
 
 class AdminEmailController extends Controller{
 
     public function indexAction(){
-        wp_enqueue_script('chayka-email-options-form');
-        wp_enqueue_style('chayka-options-form');
+        $this->enqueueScript('chayka-email-options-form');
+        $this->enqueueStyle('chayka-options-form');
+//        wp_enqueue_script('chayka-email-options-form');
+//        wp_enqueue_style('chayka-options-form');
     }
 
     public function testAction(){

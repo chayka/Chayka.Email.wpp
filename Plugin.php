@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borismossounov
- * Date: 21.10.14
- * Time: 18:20
- */
 
 namespace Chayka\Email;
 
@@ -12,43 +6,35 @@ use Chayka\WP;
 
 class Plugin extends WP\Plugin{
 
+    /* chayka: constants */
+    
     public static $instance = null;
 
     public static function init(){
-        self::$instance = $plugin = new self(__FILE__, array(
-            'admin-email'
-        ));
+        if(!static::$instance){
+            static::$instance = $app = new self(__FILE__, array(
+                'admin-email'
+                /* chayka: init-controllers */
+            ));
+	        $app->addSupport_UriProcessing();
+	        $app->addSupport_ConsolePages();
+            /* chayka: init-addSupport */
+        }
+    }
 
-        $plugin->addSupport_ConsolePages();
 
+    /**
+     * Register your action hooks here using $this->addAction();
+     */
+    public function registerActions() {
+    	/* chayka: registerActions */
     }
 
     /**
-     * Routes are to be added here via $this->addRoute();
+     * Register your action hooks here using $this->addFilter();
      */
-    public function registerRoutes(){
-        $this->addRoute('default');
-    }
-
-    /**
-     * Custom post type are to be added here
-     */
-    public function registerCustomPostTypes(){
-
-    }
-
-    /**
-     * Custom Taxonomies are to be added here
-     */
-    public function registerTaxonomies(){
-
-    }
-
-    /**
-     * Custom Sidebars are to be added here via $this->registerSidbar();
-     */
-    public function registerSidebars(){
-
+    public function registerFilters() {
+		/* chayka: registerFilters */
     }
 
     /**
@@ -56,25 +42,31 @@ class Plugin extends WP\Plugin{
      *
      * @param bool $minimize
      */
-    public function registerResources($minimize = false){
-        $this->registerScript('chayka-email-options-form', 'src/ng-modules/chayka-email-options-form.js', array('chayka-options-form', 'chayka-ajax'));
+    public function registerResources($minimize = false) {
+        $this->registerBowerResources(true);
+
+        $this->setResSrcDir('src/');
+        $this->setResDistDir('dist/');
+
+        $this->registerScript('chayka-email-options-form', 'ng-modules/chayka-email-options-form.js', array('chayka-options-form', 'chayka-ajax'));
+        $this->registerMinimizedScript('chayka-email', 'ng-modules/chayka-email.min.js', array(
+            'chayka-email-options-form',
+        ));
+		/* chayka: registerResources */
     }
 
     /**
-     * Register your action hooks here using $this->addAction();
+     * Routes are to be added here via $this->addRoute();
      */
-    public function registerActions(){
-
+    public function registerRoutes() {
+        $this->addRoute('default');
     }
 
     /**
-     * Register your action hooks here using $this->addFilter();
+     * Registering console pages
      */
-    public function registerFilters(){
-
-    }
-
     public function registerConsolePages(){
         $this->addConsoleSubPage('chayka-core', 'Email', 'update_core', 'chayka-email', '/admin-email/');
+        /* chayka: registerConsolePages */
     }
 }

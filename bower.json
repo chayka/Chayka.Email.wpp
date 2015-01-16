@@ -1,0 +1,25 @@
+{
+    "name": "Chayka.Email",
+    "description": "Email Helper for Chayka framework",
+    "version": "0.0.1",
+    "license": "MIT",
+    "authors": [
+        "Boris Mossounov <borix@tut.by>"
+    ],
+    "keywords": [
+        "WordPress",
+        "Chayka",
+        "email",
+        "mail",
+        "phpmailer"
+    ],
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "res/lib",
+        "test",
+        "tests"
+    ],
+    "dependencies": {}
+}

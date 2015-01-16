@@ -1,0 +1,30 @@
+{
+    "appType": "plugin",
+    "appName": "Chayka.Email",
+    "appDescription": "Email Helper for Chayka framework",
+    "appKeywords": "WordPress, Chayka, email, mail, phpmailer",
+    "appVersion": "0.0.1",
+    "appAuthor": "Boris Mossounov",
+    "appAuthorEmail": "borix@tut.by",
+    "appAuthorUri": "https://github.com/chayka/",
+    "appLicense": "MIT",
+    "phpNamespace": "Chayka\\Email",
+    "chaykaFramework": "external",
+    "chaykaFrameworkDeps": {
+        "helpers": true,
+        "mvc": true,
+        "wp": true,
+        "core": true
+    },
+    "support": [
+        "UriProcessing",
+        "ConsolePages"
+    ],
+    "register": [
+        "registerActions",
+        "registerFilters",
+        "registerResources",
+        "registerRoutes",
+        "registerConsolePages"
+    ]
+}

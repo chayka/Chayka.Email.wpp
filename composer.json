@@ -3,6 +3,7 @@
     "description": "Email Helper for Chayka framework",
     "minimum-stability": "dev",
     "license": "MIT",
+    "version": "0.0.1",
     "authors": [
         {
             "name": "Boris Mossounov",

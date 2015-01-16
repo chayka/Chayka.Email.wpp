@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('chayka-email-options-form', ['chayka-options-form', 'chayka-ajax'])
     .controller('test', ['$scope', 'ajax', function($scope, ajax){
         $scope.fields = {
@@ -17,5 +19,5 @@ angular.module('chayka-email-options-form', ['chayka-options-form', 'chayka-ajax
                     }
                 });
             }
-        }
+        };
     }]);
