@@ -10,7 +10,6 @@
             "email": "borix@tut.by"
         }
     ],
-    "chayka-wp-plugin": "Chayka\\Email\\Plugin",
     "autoload":{
         "classmap": ["app/helpers", "Plugin.php"]
     },

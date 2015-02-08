@@ -42,7 +42,7 @@ class EmailHelper {
      * @throws \phpmailerException
      */
     public static function send($subject, $html, $to, $from = '', $cc = '', $bcc = ''){
-        $mailFrom = OptionHelper::getOption('mail_from', 'postmaser@'.$_SERVER['SERVER_NAME']);
+        $mailFrom = OptionHelper::getOption('mail_from', 'postmaster@'.$_SERVER['SERVER_NAME']);
         $mailFromName = OptionHelper::getOption('mail_from', $_SERVER['SERVER_NAME']);
         $smtpHost = OptionHelper::getOption('smtp_host', 'localhost');
         $smtpPort = OptionHelper::getOption('smtp_port', '25');
@@ -79,7 +79,7 @@ class EmailHelper {
         $mail->isSMTP();
         $mail->Host = $smtpHost;
         $mail->Port = $smtpPort;
-        $mail->SMTPAuth = $smtpAuth;
+        $mail->SMTPAuth = !!$smtpAuth;
         $mail->Username = $smtpUser;
         $mail->Password = $smtpPass;
         $mail->SMTPSecure = $smtpSsl;
