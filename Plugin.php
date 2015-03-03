@@ -48,7 +48,7 @@ class Plugin extends WP\Plugin{
         $this->setResSrcDir('src/');
         $this->setResDistDir('dist/');
 
-        $this->registerScript('chayka-email-options-form', 'ng-modules/chayka-email-options-form.js', array('chayka-options-form', 'chayka-ajax'));
+        $this->registerNgScript('chayka-email-options-form', 'ng-modules/chayka-email-options-form.js', array('chayka-options-form', 'chayka-ajax'));
         $this->registerMinimizedScript('chayka-email', 'ng-modules/chayka-email.min.js', array(
             'chayka-email-options-form',
         ));

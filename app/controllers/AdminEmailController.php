@@ -18,7 +18,7 @@ use Exception;
 class AdminEmailController extends Controller{
 
     public function indexAction(){
-        $this->enqueueScript('chayka-email-options-form');
+        $this->enqueueNgScript('chayka-email-options-form');
         $this->enqueueStyle('chayka-options-form');
 //        wp_enqueue_script('chayka-email-options-form');
 //        wp_enqueue_style('chayka-options-form');
