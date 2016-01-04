@@ -32,6 +32,37 @@ class EmailHelper {
     }
 
     /**
+     * Set up PhpMailer instance
+     *
+     * @param PhpMailer $phpMailer
+     *
+     * @return mixed
+     */
+    public static function setupPhpMailer($phpMailer){
+        $mailFrom = OptionHelper::getOption('mail_from', 'postmaster@'.$_SERVER['SERVER_NAME']);
+        $mailFromName = OptionHelper::getOption('mail_from', $_SERVER['SERVER_NAME']);
+        $smtpHost = OptionHelper::getOption('smtp_host', 'localhost');
+        $smtpPort = OptionHelper::getOption('smtp_port', '25');
+        $smtpSsl  = OptionHelper::getOption('smtp_ssl', 'none'); // none|tsl|ssl
+        $smtpAuth  = OptionHelper::getOption('smtp_auth', false);
+        $smtpUser  = OptionHelper::getOption('smtp_user', '');
+        $smtpPass  = OptionHelper::getOption('smtp_pass', '');
+
+        $phpMailer->From = $mailFrom;
+        $phpMailer->FromName = $mailFromName;
+
+        $phpMailer->isSMTP();
+        $phpMailer->Host = $smtpHost;
+        $phpMailer->Port = $smtpPort;
+        $phpMailer->SMTPAuth = !!$smtpAuth;
+        $phpMailer->Username = $smtpUser;
+        $phpMailer->Password = $smtpPass;
+        $phpMailer->SMTPSecure = $smtpSsl;
+
+        return $phpMailer;
+    }
+
+    /**
      * @param string $subject
      * @param string $html
      * @param string $to
@@ -42,14 +73,6 @@ class EmailHelper {
      * @throws \phpmailerException
      */
     public static function send($subject, $html, $to, $from = '', $cc = '', $bcc = ''){
-        $mailFrom = OptionHelper::getOption('mail_from', 'postmaster@'.$_SERVER['SERVER_NAME']);
-        $mailFromName = OptionHelper::getOption('mail_from', $_SERVER['SERVER_NAME']);
-        $smtpHost = OptionHelper::getOption('smtp_host', 'localhost');
-        $smtpPort = OptionHelper::getOption('smtp_port', '25');
-        $smtpSsl  = OptionHelper::getOption('smtp_ssl', 'none'); // none|tsl|ssl
-        $smtpAuth  = OptionHelper::getOption('smtp_auth', false);
-        $smtpUser  = OptionHelper::getOption('smtp_user', '');
-        $smtpPass  = OptionHelper::getOption('smtp_pass', '');
 
         $fn = get_template_directory().'/app/views/email/template.phtml';
 
@@ -60,31 +83,29 @@ class EmailHelper {
             $html = str_replace('<!--content-->', $html, $view->render($fn));
         }
 
-        $mail = new PHPMailer();
+        $phpMailer = new PHPMailer();
 
-        $mail->Subject = $subject;
+        self::setupPhpMailer($phpMailer);
 
-        $mail->isHTML(true);
-        $mail->Body = $html;
-        $mail->From = $from?$from:$mailFrom;
-        $mail->FromName = $mailFromName;
-        $mail->addAddress($to);
+        $phpMailer->Subject = $subject;
+
+        $phpMailer->isHTML(true);
+        $phpMailer->Body = $html;
+
+        if($from){
+            $phpMailer->From = $from;
+            $phpMailer->FromName = '';
+        }
+
+        $phpMailer->addAddress($to);
         if($cc){
-            $mail->addCC($cc);
+            $phpMailer->addCC($cc);
         }
         if($bcc){
-            $mail->addBcc($bcc);
+            $phpMailer->addBcc($bcc);
         }
 
-        $mail->isSMTP();
-        $mail->Host = $smtpHost;
-        $mail->Port = $smtpPort;
-        $mail->SMTPAuth = !!$smtpAuth;
-        $mail->Username = $smtpUser;
-        $mail->Password = $smtpPass;
-        $mail->SMTPSecure = $smtpSsl;
-
-        $res = $mail->send();
+        $res = $phpMailer->send();
 
         return $res;
     }

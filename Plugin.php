@@ -27,6 +27,7 @@ class Plugin extends WP\Plugin{
      * Register your action hooks here using $this->addAction();
      */
     public function registerActions() {
+        $this->addAction('phpmailer_init', array('\\Chayka\\Email\\EmailHelper', 'setupPhpMailer'));
     	/* chayka: registerActions */
     }
 
